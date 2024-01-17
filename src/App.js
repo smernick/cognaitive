@@ -1,4 +1,4 @@
-import SVG from "./logo.svg";
+import { ReactComponent as Svg } from "./logo.svg";
 import "./App.css";
 
 // export default App;
@@ -12,6 +12,9 @@ function SamGPT() {
   const messagesEndRef = useRef(null);
   const AIName = 'COGN_AI_TIVE Chat'
   const user = 'You';
+  const [scriptSequence, setScriptSequence] = useState(false);
+  const scriptSequences = ['sam']
+
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -45,8 +48,8 @@ function SamGPT() {
   return (
     <div className="parent">
       <div className="child">
-      <SVG/>
-        <h1>COGN_AI_TIVE Chat</h1>
+      <Svg className="svg" />
+        {/* <h1>COGN_AI_TIVE Chat</h1> */}
         <div className="samgpt-container">
           <div className="messages">
             {messages.map((msg, index) => (
@@ -71,6 +74,7 @@ function SamGPT() {
                 id="Layer_1"
                 x="0px"
                 y="0px"
+                class="submit_svg"
                 width="30px"
                 height="30px"
                 viewBox="0 0 122.433 122.88">
