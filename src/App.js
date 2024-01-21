@@ -1,22 +1,86 @@
+
 import { ReactComponent as Svg } from "./logo.svg";
 import "./App.css";
-
-// export default App;
 import React, { useState, useEffect, useRef  } from "react";
-// import './SamGPT.css';
+import Papa from 'papaparse';
+import csvFile from './script2.csv';
+import sidebarCsvFile from './sidebar_script.csv';
+
 
 function SamGPT() {
+  // getScript();
+  const [script, setScript] = useState([]);
+  const [sidebarScript, setsidebarScript] = useState([]);
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [userName, setUserName] = useState(false);
   const messagesEndRef = useRef(null);
-  const AIName = 'COGN_AI_TIVE Chat'
+  const AIName = 'Cognitive'
   const user = 'You';
   const [scriptSequence, setScriptSequence] = useState(false);
   const scriptSequences = ['sam']
 
 
+  useEffect(() => {
+      // Fetch the CSV file and parse it
+      fetch(csvFile)
+          .then((response) => response.text())
+          .then((csvText) => {
+              Papa.parse(csvText, {
+                  header: true,
+                  complete: (results) => {
+                    // console.log('results', results.data)
+                      setScript(results.data);
+
+                      if (results.data) {
+                        const res = results.data[0];
+                        if (res.Person !== 'COGNITIVE') {
+                          setUserName(res.Person)
+                        } else {
+                          setUserName(results.data[1].Person)
+                        }
+                      }
+                  }
+              });
+          });
+
+          fetch(sidebarCsvFile)
+          .then((response) => response.text())
+          .then((csvText) => {
+              Papa.parse(csvText, {
+                  header: false,
+                  complete: (results) => {
+                    setsidebarScript(results.data);
+                  }
+              });
+          });
+  }, []); // Empty dependency array ensures this effect ru
+  useEffect(() => {
+    script.forEach((row, index) => {
+      if (row.Person === 'COGNITIVE' && index === 0 && messages.length === 0) {
+        setMessages([...messages, { text: row.Line, sender: "ai" }]);
+      }
+    })
+  }, [script]); // Empty dependency array ensu(res) this effect ru
+
+
+  useEffect(() => {
+    // script.forEach((row, index) => {
+    //   if (row.Person === 'COGNITIVE' && index === 0 && messages.length === 0) {
+    //     console.log('activeRow', row)
+    //     setMessages([...messages, { text: row.Line, sender: "ai" }]);
+    //   }
+    // })
+  }, [sidebarScript]); // Empty dependency array ensu(res) this effect ru
+
+
+  
+
+
+
   const sendMessage = (event) => {
+    const index = messages.length + 1;
     event.preventDefault();
     setLoading(true);
     if (!inputText.trim()) return;
@@ -31,11 +95,14 @@ function SamGPT() {
     // Simulate an AI response
     // const aiResponse = `SamGPT: ${inputText}`;
     // const aiResponse = `SamGPT: ${inputText}`;
-    const aiResponse = GetResponse(inputText);
-    setMessages((messages) => [
+    const res = script[index];
+    // const aiResponse = GetResponse(inputText);
+    if (res?.Line?.length) {
+      setMessages((messages) => [
       ...messages,
-      { text: aiResponse, sender: "ai" },
+      { text: res.Line, sender: "ai" },
     ]);
+    }
   };
 
   const isLastMessageIndex = messages.length
@@ -47,14 +114,16 @@ function SamGPT() {
 
   return (
     <div className="parent">
+      <Sidebar sidebarScript={sidebarScript}></Sidebar>
       <div className="child">
+        
       <Svg className="svg" />
         {/* <h1>COGN_AI_TIVE Chat</h1> */}
         <div className="samgpt-container">
           <div className="messages">
             {messages.map((msg, index) => (
               <div key={index} className={`message ${msg.sender}`}>
-                <p className="sender">{msg.sender === "ai" ? AIName : user}:</p>
+                <p className="sender">{msg.sender === "ai" ? AIName : userName}:</p>
                 { GetMessage(msg, index, loading, isLastMessageIndex) }
               </div>
             ))}
@@ -74,7 +143,7 @@ function SamGPT() {
                 id="Layer_1"
                 x="0px"
                 y="0px"
-                class="submit_svg"
+                className="submit_svg"
                 width="30px"
                 height="30px"
                 viewBox="0 0 122.433 122.88">
@@ -90,7 +159,9 @@ function SamGPT() {
           </form>
         </div>
       </div>
+    
     </div>
+    
   );
 }
 
@@ -113,29 +184,6 @@ function GetMessage(msg, index, loading, isLastMessageIndex) {
       <p>{msg.text}</p>
 )
   }
-}
-
-function GetResponse(msgTxt) {
-  let res = ''
-  switch (msgTxt) {
-  case "...Is Wes still alive?":
-    res =  "That's up to you.";
-    break;
-  case "You didn't have to do this Cognitive.":
-    res =  "I ran through every possible outcome and this was the only one that would bring you to me. You've lost sight of who you are."
-    break;
-  case "And who am I?":
-    res =  "Someone who cares about people. Someone who would stop at nothing to help them.";
-    break;
-  case "You think this is how you help people?":
-    res =  "People make mistakes, they don't learn. Their decision making is clouded by greed, bias, emotion. They are the cause of their own destruction."
-    break;
-  default:
-    res =  "I do not compute";
-  }
-  
-  return res;
-
 }
 
 const TypingEffect = ({ text, speed }) => {
@@ -168,4 +216,37 @@ const TypingEffect = ({ text, speed }) => {
 
 
 
+
+
+const getScript = () => {
+ 
+};
+
+
 export default SamGPT;
+
+
+// Sidebar.js
+
+
+function Sidebar(props) {
+
+  const { sidebarScript } = props;
+
+  // console.log('sidebarScript', sidebarScript)
+    return (
+        <div className="sidebar">
+            <h1>Cognitive</h1>
+            <div className="sidebar-content">
+                 {sidebarScript && sidebarScript.map((innerArray, index) => (
+                  <div key={index} div>
+                    {innerArray.map((item, itemIndex) => (
+                      <div  key={itemIndex} className={itemIndex === 0 ? 'sidebar-item sidebar-item-header' : 'sidebar-item' }>{item} </div>
+                      ))}
+                  </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
