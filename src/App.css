@@ -78,7 +78,7 @@
 }
 
 .header .circle2 {
-  margin: 15px 0;
+  margin: 15px 10px;;
 }
 
 .child {
@@ -183,21 +183,27 @@
   margin: 0;
 }
 
+.inner-thing {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+}
 
 
 
 .message-form {
   display: flex;
-  padding: 10px;
+  /* padding: 10px; */
   background-color: var(--background);
   border: 1px solid var(--system);
   position: absolute;
   bottom: 0;
-  width: 98%;
-  /* width: 100%; */
+  /* width: 98%; */
+  width: 100%;
 }
 
 .message-form input {
+  width: 100%;
   flex-grow: 1;
   font-size: 22px;
   font-family: "microgramma-extended", sans-serif;
@@ -281,7 +287,7 @@
   width: 20%;
   /* padding: 20px; */
   padding-right: 0;
-  /* padding-left: 10px; */
+  padding-left: 10px;
   padding-top: 0px !important;
   overflow-x: hidden;
   height: 85%;
@@ -299,10 +305,14 @@
   margin-bottom: 10px;
 }
 
-.sidebar-content:first-child .sidebar-item-header {
-  margin-top: 0 !important;
-  /* Your CSS styles here */
+.sidebar-content > div > .sidebar-item-header:not(:first-of-type) {
+  margin-top: 20px; /* Adjust the margin-top value as per your requirements */
 }
+
+.parent0 .sidebar-item-header {
+  margin-top: 0;
+}
+
 
 .sidebar-item-header {
     border: 1px solid var(--system);

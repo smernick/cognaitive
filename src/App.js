@@ -7,6 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Papa from "papaparse";
 import csvFile from "./script2.csv";
 import sidebarCsvFile from "./sidebar_script.csv";
+// import { google } from 'googleapis';
 
 function SamGPT() {
   const [script, setScript] = useState([]);
@@ -147,6 +148,7 @@ function SamGPT() {
               <div ref={messagesEndRef} />
             </div>
             <form onSubmit={sendMessage} className="message-form">
+            <div className="inner-thing">
               <input
                 type="text"
                 value={inputText}
@@ -172,11 +174,13 @@ function SamGPT() {
                   </g>
                 </svg>
               </button>
+              </div>
+
             </form>
           </div>
         </div>
       </div>
-      </div>
+    </div>
 
     </>
   );
@@ -242,7 +246,7 @@ function Sidebar(props) {
       <div className="sidebar-content">
         {sidebarScript &&
           sidebarScript.map((innerArray, index) => (
-            <div key={index} div>
+            <div key={index} className={'parent'+index}>
               {innerArray.map((item, itemIndex) => (
                 <div
                   key={itemIndex}
@@ -281,3 +285,12 @@ function smoothScrollToBottom() {
 
   scroll();
 }
+
+// const sheets = google.sheets('v4');
+
+// console.log('sheets', sheets)
+
+// const auth = new google.auth.GoogleAuth({
+//   keyFile: 'path/to/service-account-key.json',
+//   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+// });
