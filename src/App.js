@@ -102,6 +102,7 @@ function SamGPT() {
 
   return (
     <>
+    <div className="container">
       <div className="header">
         <div className="header-one">
           <div className="circle2">

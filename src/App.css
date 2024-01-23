@@ -1,6 +1,19 @@
 
 #root {
   height: 100vh;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  max-width: 1600px;
+  width: 100%;
+  max-height: 100%;
+  /* display: flex;
+  justify-content: center;
+  flex-direction: column; */
 }
 
 .svg {
@@ -64,6 +77,10 @@
   /* padding:5px 10px; */
 }
 
+.header .circle2 {
+  margin: 15px 0;
+}
+
 .child {
   width: 80%;
   padding-right: 10px;
@@ -82,10 +99,14 @@
   font-size: 20px;
 }
 
+.header-two {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .samgpt-container {
-  /* max-width: 800px; */
-  /* margin: 0 auto; */
-  /* border: 1px solid #343540; */
+  max-height: 700px;
   border-radius: 8px;
   overflow: hidden;
   border: 2px solid var(--system);
@@ -105,7 +126,7 @@
 }
 
 .messages {
-  height: 500px;
+  height: 85%;
   scroll-behavior: smooth; /* Add smooth scrolling behavior */
     max-height: 100%;
   overflow-y: auto;
@@ -269,7 +290,7 @@
 .sidebar-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .sidebar h1 {
