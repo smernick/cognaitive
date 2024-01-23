@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cognaitive/static/css/main.0a9b988a.css",
-    "main.js": "/cognaitive/static/js/main.830ae84a.js",
+    "main.js": "/cognaitive/static/js/main.767cfb9e.js",
     "static/js/787.76d6e76a.chunk.js": "/cognaitive/static/js/787.76d6e76a.chunk.js",
     "static/media/brain-blue.png": "/cognaitive/static/media/brain-blue.894fbb157cfcd395813a.png",
     "static/media/logo.svg": "/cognaitive/static/media/logo.a62841e940087cabffabf35e94e59a26.svg",
@@ -9,11 +9,11 @@
     "index.html": "/cognaitive/index.html",
     "static/media/script2.csv": "/cognaitive/static/media/script2.98aa73a4ae4ad66919cd.csv",
     "main.0a9b988a.css.map": "/cognaitive/static/css/main.0a9b988a.css.map",
-    "main.830ae84a.js.map": "/cognaitive/static/js/main.830ae84a.js.map",
+    "main.767cfb9e.js.map": "/cognaitive/static/js/main.767cfb9e.js.map",
     "787.76d6e76a.chunk.js.map": "/cognaitive/static/js/787.76d6e76a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0a9b988a.css",
-    "static/js/main.830ae84a.js"
+    "static/js/main.767cfb9e.js"
   ]
 }
