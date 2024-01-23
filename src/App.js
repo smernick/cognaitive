@@ -176,6 +176,8 @@ function SamGPT() {
           </div>
         </div>
       </div>
+      </div>
+
     </>
   );
 }
